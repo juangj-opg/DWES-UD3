@@ -15,7 +15,7 @@
     }
 </style>
 <body>
-<h1>Ejercicio 6 - Tabla de potencias del número 2 con FOR.</h1>
+<h1>Ejercicio 8 - Tabla de potencias modificado, el 2^4 desaparecerá con el break.</h1>
 <table>
     <tr>
         <th>Elevado a</th>
