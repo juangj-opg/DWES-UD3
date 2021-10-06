@@ -34,13 +34,28 @@
 </tr>
 <?php
 // Empezaremos haciendo bucles para ir calculando a la vez que creando celdas en la tabla
+
+$color = 0; // Será la variante que irá cambiando los colores
 for ($i=0; $i <= 10; $i++) { 
-    echo "<tr>";
-    echo "<td>$i</td>";
-    for ($j=0; $j <= 10; $j++) { 
-        echo "<td>",$i*$j,"</td>";
-    }
-    echo "</tr>";
+    
+    
+    if($color == 0){ // Linea Verde
+        echo "<tr bgcolor=lightgreen>";
+        echo "<td><b>$i</b></td>";
+        for ($j=0; $j <= 10; $j++) { 
+            echo "<td>",$i*$j,"</td>";
+        }
+        echo "</tr>";
+        $color++;
+    } else{ // Linea Blanca
+        echo "<tr bgcolor=white>";
+        echo "<td><b>$i</b></td>";
+        for ($j=0; $j <= 10; $j++) { 
+            echo "<td>",$i*$j,"</td>";
+        }
+        echo "</tr>";
+        $color--;
+    }  
 }
 
 
