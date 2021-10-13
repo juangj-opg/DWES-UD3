@@ -18,44 +18,61 @@ input#submit, input#reset{
 </style>
 <body>
 <h1>Ejercicio 17 - Formulario 1</h1>
-<form action="">
+<?php
+// Recogida de los datos del formulario
+// El formulario será unicamente POST, no usaremos el GET.
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $nombre = LimpiaInput($_POST["nombre"]); // Aquí usamos una función que hemos creado posteriormente para limpiar el nombre de posible etiquetas u otros.
+    $apellidos = LimpiaInput($_POST["apellidos"]);
+    $direccion = LimpiaInput($_POST["direccion"]);
+    $conexion = $_POST["conexion"];
+    $instituto = LimpiaInput($_POST["instituto"]);
+    $estudios = LimpiaInput($_POST["estudios"]);
+    
+}
+
+?>
+
+
+<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST">
 <!-- Primera parte del formulario -->
   <fieldset>
     <legend>Formulario de opciones</legend>
     <table>
         <tr>
             <td><label for="nombre">Nombre</label></td>
-            <td><input type="text" name="nombre" id="nombre"></td>
+            <td><input type="text" name="nombre" id="nombre" required></td>
         </tr>
         <tr>
             <td><label for="apellidos">Apellidos</label></td>
-            <td><input type="text" name="apellidos" id="apellidos"></td>
+            <td><input type="text" name="apellidos" id="apellidos" required></td>
         </tr>
         <tr>
             <td><label for="direccion">Direccion</label></td>
-            <td><input type="text" name="direccion" id="direccion"></td>
+            <td><input type="text" name="direccion" id="direccion" required></td>
         </tr>
     </table>
 
-    <input type="radio" name="conexion" value="wifi" id="wifi">
+    <input type="radio" name="conexion" value="wifi" id="wifi" required>
     <label for="wifi">WiFi</label>
-    <input type="radio" name="conexion" value="cable" id="cable">
+    <input type="radio" name="conexion" value="cable" id="cable" required>
     <label for="cable">Cable</label>
-    <input type="radio" name="conexion" value="fibra" id="fibra">
+    <input type="radio" name="conexion" value="fibra" id="fibra" required>
     <label for="fibra">Fibra</label>
     
     <table>
         <tr>
             <td><label for="instituto">Instituto</label></td>
-            <td><input type="text" name="instituto" id="instituto"></td>
+            <td><input type="text" name="instituto" id="instituto" required></td>
         </tr>
         <tr>
             <td><label for="estudios">Estudios elegidos</label></td>
-            <td><input type="text" name="estudios" id="estudios"></td>
+            <td><input type="text" name="estudios" id="estudios" required></td>
         </tr>
     </table>
 
-    <select name="dia" id="dia" size="4" multiple>
+    <select name="dia" id="dia" size="4" multiple required>
         <option value="lunes">Lunes</option>
         <option value="martes">Martes</option>
         <option value="miercoles">Miércoles</option>
@@ -70,6 +87,7 @@ input#submit, input#reset{
   <fieldset>
     <legend>Preferencias</legend>
 
+    <!-- Los checkbox, no pueden tener un required, o, al ponerlo, te pedirá marcar todas las casillas, no como un radius-->
     <input type="checkbox" name="Preferencia" value="historia" id="historia">
     <label for="historia">Historia</label>
     <input type="checkbox" name="Preferencia" value="geografia" id="historia">
@@ -86,5 +104,18 @@ input#submit, input#reset{
     <input type="reset" id="reset" value="Limpiar">
 </fieldset>
 </form>
+<?php
+// Funciones
+
+// Función para limpiar los caracteres no deseados e
+// impedir la ejecución de scripts u otros.
+function LimpiaInput($V){
+    $V = strip_tags($V);
+    $V = stripslashes($V);
+    $V = htmlspecialchars($V);
+    return $V;
+}
+
+?>
 </body>
 </html>
