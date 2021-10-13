@@ -29,6 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $conexion = $_POST["conexion"];
     $instituto = LimpiaInput($_POST["instituto"]);
     $estudios = LimpiaInput($_POST["estudios"]);
+    $preferencia = $_POST["Preferencia"];
     
 }
 
@@ -47,6 +48,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <tr>
             <td><label for="apellidos">Apellidos</label></td>
             <td><input type="text" name="apellidos" id="apellidos" required></td>
+            
         </tr>
         <tr>
             <td><label for="direccion">Direccion</label></td>
@@ -65,6 +67,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <tr>
             <td><label for="instituto">Instituto</label></td>
             <td><input type="text" name="instituto" id="instituto" required></td>
+            <?php // Validacion del instituto - Debe comenzar por IES
+            if($_SERVER["REQUEST_METHOD"] == "POST"){
+                if(!preg_match("/IES/", $instituto)) {
+                    echo "<td>El nombre del instituto no empieza por <b>IES</b></td>";
+                }
+            }
+            ?>
         </tr>
         <tr>
             <td><label for="estudios">Estudios elegidos</label></td>
@@ -87,7 +96,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   <fieldset>
     <legend>Preferencias</legend>
 
-    <!-- Los checkbox, no pueden tener un required, o, al ponerlo, te pedirá marcar todas las casillas, no como un radius-->
+    <!-- Los checkbox, no pueden tener un required, o, al ponerlo, te pedirá marcar todas las casillas, no como un radio -->
     <input type="checkbox" name="Preferencia" value="historia" id="historia">
     <label for="historia">Historia</label>
     <input type="checkbox" name="Preferencia" value="geografia" id="historia">
