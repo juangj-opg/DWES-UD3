@@ -27,7 +27,7 @@
 <!-- La recogida de los datos sera vía POST -->
 
 <!-- Creación del formulario -->
-<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="GET">
+<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST">
   <fieldset>
     <legend>Datos del usuario</legend>
     <table>
